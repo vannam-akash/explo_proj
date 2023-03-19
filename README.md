@@ -1,1 +1,1 @@
-# explo_proj
+# EXPLORATORY PEOJECT
