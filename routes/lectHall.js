@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const app = express();
 
-const LectureHall = require('../models/LectHall');
+const LectureHall = require('../models/lectHall');
 
 router.route('/')
     .get(async(req,res)=>{

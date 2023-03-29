@@ -16,7 +16,7 @@ async function main() {
         name:"Arnab Sarkar",
         password:"p1",
         uid:"p1",
-        classes:"64205159a652e9756b9ad22d"
+        class:"64205159a652e9756b9ad22d"
     });
     await p1.save();
 
@@ -24,7 +24,7 @@ async function main() {
         name:"Awaneesh",
         password:"p2",
         uid:"p2",
-        classes:"64205159a652e9756b9ad22f"
+        class:"64205159a652e9756b9ad22f"
     });
     await p2.save();
     
@@ -32,7 +32,7 @@ async function main() {
         name:"Rajeev Kumar",
         password:"p3",
         uid:"p3",
-        classes:"64205159a652e9756b9ad231"
+        class:"64205159a652e9756b9ad231"
     });
     await p3.save();
     
@@ -40,7 +40,7 @@ async function main() {
         name:"Amit Tyagi",
         password:"p4",
         uid:"p4",
-        classes:"64205159a652e9756b9ad233"
+        class:"64205159a652e9756b9ad233"
     });
     await p4.save();
 
@@ -48,7 +48,7 @@ async function main() {
         name:"M. Vashishth",
         password:"p5",
         uid:"p5",
-        classes:"64205159a652e9756b9ad235"
+        class:"64205159a652e9756b9ad235"
     });
     await p5.save();
 };

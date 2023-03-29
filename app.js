@@ -9,15 +9,6 @@ const morgan = require('morgan');
 const path = require('path');
 const ejsMate = require('ejs-mate');
 
-
-
-// Requiring models
-const Student = require('./models/student');
-const Professor = require('./models/professor');
-const Class = require('./models/class');
-const Attendance = require('./models/attendance');
-const LectureHall = require('./models/lectHall');
-
 const app = express();
 
 // Middleware

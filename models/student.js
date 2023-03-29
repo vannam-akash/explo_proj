@@ -6,15 +6,9 @@ const studentSchema = new Schema({
     type: String,
     required: true
   },
-  // email: {
-  //   type: String,
-  //   // required: true,
-  //   unique: true
-  // },
   rollNo: {
     type: Number,
     required: true,
-    // unique: true
   },
   password: {
     type: String,

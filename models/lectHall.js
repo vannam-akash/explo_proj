@@ -12,7 +12,7 @@ const lectureHallSchema = new mongoose.Schema({
   },
   occupiedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Class'
+    ref: 'Professor'
   }
 });
 

@@ -14,21 +14,10 @@ const professorSchema = new Schema({
     type: String,
     required: true
   },
-  email: {
-    type: String,
-    // required: true,
-    // unique: true
-  },
-  phone: {
-    type: String,
-    // required: true,
-    // unique: true
-  },
-  classes: [{
+  class: {
     type: Schema.Types.ObjectId,
     ref: 'Class'
-  }]
-  // other fields as required
+  }
 });
 
 const Professor = mongoose.model('Professor', professorSchema);
