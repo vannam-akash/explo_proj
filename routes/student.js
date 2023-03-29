@@ -5,11 +5,8 @@ const app = express();
 // Requiring controlles
 const controllers = require('../controllers/student');
 
-router.route('/login')
-    .get(controllers.renderLoginForm)
-    .post(controllers.login);
-
-router.route('/:id')
-    .get(controllers.showDashboard);
+router.route('/attendance')
+    .get(controllers.renderAttendanceForm)
+    .post(controllers.markAttendance);
 
 module.exports = router;

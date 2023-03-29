@@ -10,21 +10,16 @@ function catchAsync(fn) {
 }
 
 module.exports = {
-    renderLoginForm :catchAsync(async(req,res,next) => {
-        res.render('students/login');
+    renderAttendanceForm :catchAsync(async(req,res,next) => {
+        res.render('students/attendance');
     }),
-    login : catchAsync(async(req,res,next)=>{
+    markAttendance : catchAsync(async(req,res,next)=>{
         const {rollNo, password} = req.body;
         const stud = await Student.findOne({rollNo,password});
         if(!stud) throw new Error({message:"Sorry could not find student!!"});
-        req.session.studentId = stud._id;
-        res.redirect(`/students/${stud._id}`);
-    }),
-    showDashboard: catchAsync(async(req,res,next)=>{
-        const studId = req.session.studentId;
-        const stud = await Student.findById(studId);
+        req.session.studId = stud._id;
+        console.log(stud,req.body);
         res.send(stud);
-        // res.render('error');
-    })
+    }),
 }
     

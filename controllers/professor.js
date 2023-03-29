@@ -17,13 +17,12 @@ module.exports = {
         const {uid, password} = req.body;
         const prof = await Professor.findOne({uid,password});
         if(!prof) throw new Error({message:"Sorry could not find professor!!"});
-        req.session.professorId = prof._id;
-        res.redirect(`/professors/${prof._id}`);
+        req.session.profId = prof._id;
+        res.redirect('/lectHalls');
     }),
-    showDashboard: catchAsync(async(req,res,next)=>{
-        const profId = req.session.professorId;
-        const prof = await Professor.findById(profId);
-        res.send(prof);
+    logout: catchAsync(async(req,res,next)=>{
+        req.session.profId=null;
+        res.redirect('/lectHalls');
     })
 }
     

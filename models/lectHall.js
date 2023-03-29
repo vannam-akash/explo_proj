@@ -10,9 +10,15 @@ const lectureHallSchema = new mongoose.Schema({
     enum: ['Available', 'Occupied'],
     default: 'Available'
   },
+  class: {
+    type: String,
+  },
+  passcode:{
+    type: String
+  },
   occupiedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Professor'
+    type: String,
+    default:null
   }
 });
 

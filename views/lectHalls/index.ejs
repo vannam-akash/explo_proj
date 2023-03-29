@@ -7,12 +7,16 @@
       <div class="col-md-4 mb-4">
         <div class="card h-100" style="background-color: black ; color: white;">
           <div class="card-body">
-            <h5 class="card-title"><%= lts[i].name %></h5>
-            <h6 style="display: inline;" >Status: </h6>
-            <p style="display: inline;" class="card-text"><%= lts[i].status %></p>
+            <h5 class="card-title"><%= lts[i].name %></h5> <br>
+            <p id="status" class="card-text"><b>Status: </b><%= lts[i].status %></p>
             <% if (lts[i].occupiedBy) { %>
-                <p class="card-text"><%= lts[i].occupiedBy %></p>
-            <% }%>
+                <p class="card-text"><b> Occupied By: </b><%= lts[i].occupiedBy %></p>
+                <p class="card-text"><b> Course: </b><%= lts[i].class %></p>
+            <% }else if(profID){%>
+              <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= profID %>?_method=PUT"  method="POST">
+                <button type="submit" class="btn btn-success">Book</button>
+              </form>
+            <% } %>
           </div>
         </div>
       </div>
