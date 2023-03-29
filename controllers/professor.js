@@ -22,7 +22,7 @@ module.exports = {
     }),
     showDashboard: catchAsync(async(req,res,next)=>{
         const profId = req.session.professorId;
-        const prof = await Professor.findById(profId).populate('classes');
+        const prof = await Professor.findById(profId);
         res.send(prof);
     })
 }

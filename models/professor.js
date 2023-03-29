@@ -15,7 +15,7 @@ const professorSchema = new Schema({
     required: true
   },
   class: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'Class'
   }
 });
