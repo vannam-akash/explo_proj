@@ -11,7 +11,8 @@ function catchAsync(fn) {
 
 module.exports = {
     renderLoginForm :catchAsync(async(req,res,next) => {
-        res.render('professor/login');
+        if(req.session.profId==null)res.render('professor/login');
+        else res.redirect('/lectHalls');
     }),
     login : catchAsync(async(req,res,next)=>{
         const {uid, password} = req.body;

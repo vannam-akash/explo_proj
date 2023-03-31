@@ -2,18 +2,21 @@
 
 <div class="container mt-5">
     <h1 class="text-center mb-5">Lecture Hall Status</h1>
+    <% if(prof_) {%>
+       <h4 class="text-center mb-5">Professor : <%= prof_.name  %></h3>
+    <% } %>
     <div class="row">
       <% for (let i = 0; i <= 3; i++) { %>
       <div class="col-md-4 mb-4">
         <div class="card h-100" style="background-color: black ; color: white;">
           <div class="card-body">
-            <h5 class="card-title"><%= lts[i].name %></h5> <br>
+             <h5 class="card-title"><%= lts[i].name %></h5> <br>
             <p id="status" class="card-text"><b>Status: </b><%= lts[i].status %></p>
             <% if (lts[i].occupiedBy) { %>
                 <p class="card-text"><b> Occupied By: </b><%= lts[i].occupiedBy %></p>
                 <p class="card-text"><b> Course: </b><%= lts[i].class %></p>
-            <% }else if(profID){%>
-              <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= profID %>?_method=PUT"  method="POST">
+            <% }else if(prof_ &&  !(lts.some(function(e){return (e.status.toString()=="Occupied" && e.occupiedBy.toString()==prof_.name.toString())}))){%>
+              <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= prof_._id %>?_method=PUT" method="POST">
                 <button type="submit" class="btn btn-success">Book</button>
               </form>
             <% } %>
@@ -22,4 +25,8 @@
       </div>
       <% } %>
     </div>
+    <div class>
+      <h4 class="text-center mt-5">Time : <%= (new Date(Date.now())).getHours()+":"+(new Date(Date.now())).getMinutes() %></h4>
+    </div>
+   
   </div>
