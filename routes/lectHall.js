@@ -9,6 +9,16 @@ const LectureHall = require('../models/lectHall');
 router.route('/')
     .get(async(req,res)=>{  
         const lts = await LectureHall.find({});
+        
+        for(lt of lts){
+            const t1=new Date(Date.now());
+            if(lt.occupiedBy && ((t1.getTime()-lt.bookTime.getTime())/60000>60 || (t1.getMinutes()>55 && t2.getHours()>lt.bookTime.getHours()))){
+                lt.occupiedBy=null;
+                lt.bookTime=new Date(Date.now());
+                lt.status="Available";
+                await lt.save();
+            }
+        }
         //console.log(req.session);
         let profID = req.session.profId || null;
         if(profID)profID=new mongoose.Types.ObjectId(profID);
@@ -31,6 +41,7 @@ router.route('/:lid/prof/:profid')
         lt.occupiedBy = prof_.name;
         lt.class = prof_.class;
         lt.status = "Occupied";
+        lt.bookTime = new Date(Date.now());
         await lt.save();
         
         console.log("start",prof_,"end");

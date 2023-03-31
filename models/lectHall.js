@@ -19,6 +19,11 @@ const lectureHallSchema = new mongoose.Schema({
   occupiedBy: {
     type: String,
     default:null
+  },
+  bookTime: {
+    type:Date,
+    default:Date.now(),
+    required:true
   }
 });
 
