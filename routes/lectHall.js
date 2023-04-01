@@ -12,7 +12,7 @@ router.route('/')
         
         for(lt of lts){
             const t1=new Date(Date.now());
-            if(lt.occupiedBy && ((t1.getTime()-lt.bookTime.getTime())/60000>60 || (t1.getMinutes()>55 && t2.getHours()>lt.bookTime.getHours()))){
+            if(lt.occupiedBy && ((t1.getTime()-lt.bookTime.getTime())/60000>60 || (t1.getMinutes()>55 && t1.getHours()>lt.bookTime.getHours()))){
                 lt.occupiedBy=null;
                 lt.bookTime=new Date(Date.now());
                 lt.status="Available";
@@ -38,6 +38,8 @@ router.route('/:lid/prof/:profid')
         const prof_ = await Professor.findById(profid);
         //console.log(lid);
         const lt = await LectureHall.findById(lid);
+        prof_.att=[];
+        await prof_.save();
         lt.occupiedBy = prof_.name;
         lt.class = prof_.class;
         lt.status = "Occupied";

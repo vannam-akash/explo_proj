@@ -19,7 +19,7 @@ app.use(methodOverride('_method'))
 
 
 // Set view engine to EJS
-app.engine('ejs', ejsMate)
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -38,6 +38,8 @@ const sessionOptions = {
 };  
 app.use(session(sessionOptions));
 
+
+// app.get('/admin',)
 
 // Morgan tiny
 app.use(morgan('tiny'));
@@ -62,10 +64,37 @@ async function main() {
   // });
   
   // Requiring routes
-  app.use('/lectHalls',require('./routes/lectHall'));
-  app.use('/students',require('./routes/student'));
-  app.use('/professors',require('./routes/professor'));
+let passcodes={passes:{pg4:"",pg5:"",pg6:"",pg7:""},func:null};
+// passcodes = {
+//   pg4:"4"+Math.floor(Math.random()*1000+1),
+//   pg5:"5"+Math.floor(Math.random()*1000+1),
+//   pg6:"6"+Math.floor(Math.random()*1000+1),
+//   pg7:"7"+Math.floor(Math.random()*1000+1)
+// }
+function codeGen(a){
+ 
+    a.pg4="4"+Math.floor(Math.random()*1000+1),
+    a.pg5="5"+Math.floor(Math.random()*1000+1),
+    a.pg6="6"+Math.floor(Math.random()*1000+1),
+    a.pg7="7"+Math.floor(Math.random()*1000+1)
+  }
+  passcodes.func=codeGen;
+
+  console.log(passcodes);
+  passcodes.func(passcodes.passes);
+  console.log(passcodes);
+  
+
+//codeGen();
+  
+  app.use('/lectHalls',require('./routes/lectHall'));console.log(passcodes);
+  app.use('/students',require('./routes/student')(passcodes));console.log(passcodes);
+  app.use('/professors',require('./routes/professor'));console.log(passcodes);
     
   // Start the server
   const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
+
+module.exports={
+  codeGen:codeGen
+};
