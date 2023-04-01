@@ -18,6 +18,57 @@ app.use(methodOverride('_method'))
 // Middleware
 
 
+// Requiring models
+const Professor = require('./models/professor');
+const LectureHall = require('./models/lectHall');
+
+// Function for updating the lt and professor status
+async function update(){
+  const lts = await LectureHall.find();
+
+  let t = new Date();
+  let min = t.getMinutes();
+  let sec = t.getSeconds();
+  console.log("Inside update function" , min,sec);
+  if(min == 50){
+    console.log("inside if statement")
+    for(lt of lts){
+      if(lt.occupiedBy){
+        console.log("Updating.......")
+        const profName = lt.occupiedBy;
+        const prof = await Professor.findOne({name: profName});
+        prof.isTakingClass = false;
+        lt.status = "Available";
+        lt.class = null;
+        lt.occupiedBy = null;
+        lt.classTime = null;
+        await lt.save();
+        await prof.save();
+      }
+    }
+  }
+}
+// Code to set the time offset and 1 hr interval for running this function
+let t = new Date();
+let min = t.getMinutes();
+let sec = t.getSeconds();
+if(min<50){
+  let difMin = 50 - min - 1;
+  let difSec = 60 - sec;
+  let timeout = difMin * 60 * 1000 + difSec * 1000
+  setTimeout(() => {
+    setInterval(update, 1000 * 60 * 60);
+  }, timeout);
+}
+else {
+  let difMin = 60 - min - 1;
+  let difSec = 60 - sec; 
+  let timeout = (difMin + 60) * 60 * 1000 + difSec * 1000;
+  setTimeout(()=>{
+    setInterval(update, 1000 * 60 * 60);
+  }, timeout);
+}
+
 // Set view engine to EJS
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
@@ -56,16 +107,18 @@ async function main() {
 
 // Error handler
 // app.use(function(err, req, res, next) {
-  //   console.error(err.stack);  
-  //   console.log("Got inside the error handler!")
-  //   res.status(500).render('error');
-  // });
+//   console.error(err.stack);  
+//   console.log("Got inside the error handler!")
+//   res.status(500).render('error');
+// });
   
-  // Requiring routes
-  app.use('/lectHalls',require('./routes/lectHall'));
-  app.use('/students',require('./routes/student'));
-  app.use('/professors',require('./routes/professor'));
+// Requiring routes
+app.use('/lectHalls',require('./routes/lectHall'));
+app.use('/students',require('./routes/student'));
+app.use('/professors',require('./routes/professor'));
     
-  // Start the server
-  const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server started on port ${port}`));
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});

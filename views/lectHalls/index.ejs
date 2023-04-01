@@ -1,9 +1,20 @@
 <% layout('layouts/boilerplate') -%>
 
 <div class="container mt-5">
+  <!-- Function to check if required conditions are met or not for showing the button -->
+  <% 
+    function bookValid(prof) {
+      if(!prof) return false;
+      if(prof.isTakingClass) return false;
+      let t = new Date();
+      let min = t.getMinutes();
+      if(min>=50 && min<59)return true;
+      else return false;
+    }    
+  %>
     <h1 class="text-center mb-5">Lecture Hall Status</h1>
-    <% if(prof_) {%>
-       <h4 class="text-center mb-5">Professor : <%= prof_.name  %></h3>
+    <% if(prof) {%>
+       <h4 class="text-center mb-5">Professor : <%= prof.name  %></h3>
     <% } %>
     <div class="row">
       <% for (let i = 0; i <= 3; i++) { %>
@@ -15,8 +26,9 @@
             <% if (lts[i].occupiedBy) { %>
                 <p class="card-text"><b> Occupied By: </b><%= lts[i].occupiedBy %></p>
                 <p class="card-text"><b> Course: </b><%= lts[i].class %></p>
-            <% }else if(prof_ &&  !(lts.some(function(e){return (e.status.toString()=="Occupied" && e.occupiedBy.toString()==prof_.name.toString())}))){%>
-              <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= prof_._id %>?_method=PUT" method="POST">
+                <p class="card-text"><b> Class Time: </b><%= lts[i].classTime %></p>
+            <% }else if(bookValid(prof)){%>
+              <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= prof._id %>?_method=PUT" method="POST">
                 <button type="submit" class="btn btn-success">Book</button>
               </form>
             <% } %>
@@ -26,7 +38,24 @@
       <% } %>
     </div>
     <div class>
-      <h4 class="text-center mt-5">Time : <%= (new Date(Date.now())).getHours()+":"+(new Date(Date.now())).getMinutes() %></h4>
-    </div>
-   
+      <h4 class="text-center" id="clock"></h4>
+    </div>  
   </div>
+
+
+  <script>
+    function updateClock() {
+      let now = new Date();
+      let hours = now.getHours() % 12 || 12;
+      let minutes = ("0" + now.getMinutes()).slice(-2);
+      let seconds = ("0" + now.getSeconds()).slice(-2);
+      let ampm = hours < 12 ? "AM" : "PM";
+      let timeString = hours + ":" + minutes + ":" + seconds + " " + ampm;
+      document.getElementById("clock").innerHTML = "Time: " + timeString;
+    }
+
+    window.onload = function() {
+      updateClock();
+      setInterval(updateClock, 1000);
+    };
+  </script>

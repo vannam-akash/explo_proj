@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const lectureHallSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
   },
   status: {
     type: String,
@@ -20,10 +19,9 @@ const lectureHallSchema = new mongoose.Schema({
     type: String,
     default:null
   },
-  bookTime: {
-    type:Date,
-    default:Date.now(),
-    required:true
+  classTime: {
+    type:String,
+    default:null
   }
 });
 

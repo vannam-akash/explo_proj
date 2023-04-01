@@ -14,12 +14,20 @@ const professorSchema = new Schema({
     type: String,
     required: true
   },
+  isTakingClass: {
+    type: Boolean,
+    default: false
+  },
   class: {
     type: String,
-    ref: 'Class'
   }
 });
 
-const Professor = mongoose.model('Professor', professorSchema);
-
-module.exports = Professor;
+if(!mongoose.models.Professor)
+{
+  const professor = mongoose.model('Professor',professorSchema);
+  module.exports = professor;
+}
+else{
+  module.exports = mongoose.models.Professor;
+}

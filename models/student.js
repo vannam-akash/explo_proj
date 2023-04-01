@@ -3,8 +3,7 @@ const { Schema } = mongoose;
 
 const studentSchema = new Schema({
   name: {
-    type: String,
-    required: true
+    type: String
   },
   rollNo: {
     type: Number,
@@ -13,18 +12,13 @@ const studentSchema = new Schema({
   password: {
     type: String,
     required: true
-  },
-  classes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Class'
-  }],
+  }
 });
 
-if(!mongoose.models.Student)
-{
-  const Student = mongoose.model('Student', studentSchema);
-  module.exports = Student;
+if(!mongoose.models.Student){
+  const student = mongoose.model('Student',studentSchema);
+  module.exports = student;
 }
 else{
-  module.exports = Student;
+  module.exports = mongoose.models.Student;
 }
