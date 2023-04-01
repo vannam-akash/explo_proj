@@ -18,7 +18,12 @@ const professorSchema = new Schema({
     type: String,
     required: true
   },
+  isTakingClass: {
+    type: Boolean,
+    default: false
+  },
   class: {
+<<<<<<< HEAD
     type: String
     //ref: 'Class'
   },
@@ -26,8 +31,17 @@ const professorSchema = new Schema({
       type:Schema.Types.ObjectId,
       ref:'Student' 
   }]
+=======
+    type: String,
+  }
+>>>>>>> 016a8b206b72e5c8533bd9a752420acd4289c776
 });
 
-const Professor = mongoose.model('Professor', professorSchema);
-
-module.exports = Professor;
+if(!mongoose.models.Professor)
+{
+  const professor = mongoose.model('Professor',professorSchema);
+  module.exports = professor;
+}
+else{
+  module.exports = mongoose.models.Professor;
+}

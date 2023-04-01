@@ -8,6 +8,7 @@ const LectureHall = require('../models/lectHall');
 
 router.route('/')
     .get(async(req,res)=>{  
+<<<<<<< HEAD
         const lts = await LectureHall.find({});
         
         for(lt of lts){
@@ -20,48 +21,45 @@ router.route('/')
             }
         }
         //console.log(req.session);
+=======
+        const lts = await LectureHall.find();
+>>>>>>> 016a8b206b72e5c8533bd9a752420acd4289c776
         let profID = req.session.profId || null;
-        if(profID)profID=new mongoose.Types.ObjectId(profID);
-        console.log(profID);
-        let prof_=null;
-        if(profID) {prof_ = await Professor.findById(profID);}
-        console.log("start",prof_,"end");
-        res.render('lectHalls/index',{lts,prof_});
+        let prof=null;
+        if(profID) {prof = await Professor.findById(profID);}
+        res.render('lectHalls/index',{lts,prof,Professor});
     });
-
-
 
 router.route('/:lid/prof/:profid')
     .put(async(req,res)=>{
         const {lid,profid} = req.params;
-        //profid=new mongoose.Types.ObjectId(profid);
-        const prof_ = await Professor.findById(profid);
-        //console.log(lid);
+        const prof = await Professor.findById(profid);
         const lt = await LectureHall.findById(lid);
+<<<<<<< HEAD
         prof_.att=[];
         await prof_.save();
         lt.occupiedBy = prof_.name;
         lt.class = prof_.class;
+=======
+        lt.occupiedBy = prof.name;
+        lt.class = prof.class;
+>>>>>>> 016a8b206b72e5c8533bd9a752420acd4289c776
         lt.status = "Occupied";
-        lt.bookTime = new Date(Date.now());
-        await lt.save();
-        
-        console.log("start",prof_,"end");
+        let t = new Date();
+        let hr = t.getHours();
+        lt.classTime = `${(hr+1)%12} - ${(hr+2)%12}`;
+        prof.isTakingClass = true;
+        await lt.save();        
+        await prof.save();
         res.redirect(`/lectHalls/prof/${profid}`);
     });
 
 router.route('/prof/:profid')
     .get(async(req,res)=>{
         const {profid} = req.params;
-        //profid=new mongoose.Types.ObjectId(profid);
-        const prof_ = await Professor.findById(profid);
-        const lts = await LectureHall.find({});
-        res.render('lectHalls/index',{lts,prof_});
+        const prof= await Professor.findById(profid);
+        const lts = await LectureHall.find();
+        res.render('lectHalls/index',{lts,prof});
     });
-
-
-
-
-
 
 module.exports = router;
