@@ -16,15 +16,7 @@ const studentSchema = new Schema({
   password: {
     type: String,
     required: true
-<<<<<<< HEAD
-  },
-  classes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Professor'
-  }],
-=======
   }
->>>>>>> 016a8b206b72e5c8533bd9a752420acd4289c776
 });
 
 if(!mongoose.models.Student){

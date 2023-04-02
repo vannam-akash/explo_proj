@@ -15,12 +15,55 @@ const app = express();
 app.use(methodOverride('_method'))
 
 
+
+
+
 // Middleware
 
 
 // Requiring models
 const Professor = require('./models/professor');
 const LectureHall = require('./models/lectHall');
+const Student = require('./models/student');
+const Passcode = require('./models/passcode');
+
+//updating codes every 30 secs
+async function func1(){
+  
+  const pg4=await Passcode.findOne({name:"pass4"});
+  const pg5=await Passcode.findOne({name:"pass5"});
+  const pg6=await Passcode.findOne({name:"pass6"});
+  const pg7=await Passcode.findOne({name:"pass7"});
+
+  pg4.pass="4"+Math.floor(Math.random()*1000+1);
+  pg5.pass="5"+Math.floor(Math.random()*1000+1);
+  pg6.pass="6"+Math.floor(Math.random()*1000+1);
+  pg7.pass="7"+Math.floor(Math.random()*1000+1);
+
+  await pg4.save();
+  await pg5.save();
+  await pg6.save();
+  await pg7.save();
+
+}
+setInterval(func1,30*1000);
+
+
+async function func2(){
+  
+  const prof=await Professor.find({});
+  for(x of prof){
+    
+    x.att=[];
+    console.log(x);
+    await x.save();
+  }
+ 
+}
+setInterval(func2,65*60*1000);
+
+
+
 
 // Function for updating the lt and professor status
 async function update(){
@@ -114,43 +157,6 @@ async function main() {
 //   res.status(500).render('error');
 // });
   
-<<<<<<< HEAD
-  // Requiring routes
-let passcodes={passes:{pg4:"",pg5:"",pg6:"",pg7:""},func:null};
-// passcodes = {
-//   pg4:"4"+Math.floor(Math.random()*1000+1),
-//   pg5:"5"+Math.floor(Math.random()*1000+1),
-//   pg6:"6"+Math.floor(Math.random()*1000+1),
-//   pg7:"7"+Math.floor(Math.random()*1000+1)
-// }
-function codeGen(a){
- 
-    a.pg4="4"+Math.floor(Math.random()*1000+1),
-    a.pg5="5"+Math.floor(Math.random()*1000+1),
-    a.pg6="6"+Math.floor(Math.random()*1000+1),
-    a.pg7="7"+Math.floor(Math.random()*1000+1)
-  }
-  passcodes.func=codeGen;
-
-  console.log(passcodes);
-  passcodes.func(passcodes.passes);
-  console.log(passcodes);
-  
-
-//codeGen();
-  
-  app.use('/lectHalls',require('./routes/lectHall'));console.log(passcodes);
-  app.use('/students',require('./routes/student')(passcodes));console.log(passcodes);
-  app.use('/professors',require('./routes/professor'));console.log(passcodes);
-    
-  // Start the server
-  const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server started on port ${port}`));
-
-module.exports={
-  codeGen:codeGen
-};
-=======
 // Requiring routes
 app.use('/lectHalls',require('./routes/lectHall'));
 app.use('/students',require('./routes/student'));
@@ -161,4 +167,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
->>>>>>> 016a8b206b72e5c8533bd9a752420acd4289c776

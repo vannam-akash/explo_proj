@@ -12,7 +12,7 @@ const professorSchema = new Schema({
   },
   uid:{
     type: String,
-    required:true
+    required:true 
   },
   password: {
     type: String,
@@ -23,18 +23,12 @@ const professorSchema = new Schema({
     default: false
   },
   class: {
-<<<<<<< HEAD
-    type: String
-    //ref: 'Class'
+    type: String,
   },
   att:[{
-      type:Schema.Types.ObjectId,
-      ref:'Student' 
+    type:Schema.Types.ObjectId,
+    ref:'Student'
   }]
-=======
-    type: String,
-  }
->>>>>>> 016a8b206b72e5c8533bd9a752420acd4289c776
 });
 
 if(!mongoose.models.Professor)
