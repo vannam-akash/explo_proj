@@ -39,4 +39,3 @@ async function main() {
     });
     await stud4.save();
 };
-

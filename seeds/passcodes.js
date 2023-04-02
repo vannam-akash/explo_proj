@@ -35,4 +35,3 @@ async function main() {
     });
     await pg7.save();
 };
-

@@ -52,5 +52,3 @@ async function main() {
     });
     await p5.save();
 };
-
-

@@ -31,4 +31,3 @@ async function main() {
     });
     await g7.save();
 };
-

@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Error</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-      body {
-        background-color: #ffe6e6;
-      }
-      .error-message {
-        background-color: #ffcccc;
-        border: 1px solid #ff9999;
-        padding: 10px;
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="mt-5">Error</h1>
-      <div class="error-message">
-        <h1>This is error page</h1>
-        <p><%= message %></p>
-      </div>
+<% layout('layouts/boilerplate')%>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><%= err.message %></err></h4>
+            <p><%= err.stack %></p>
+        </div>
     </div>
-  </body>
-</html>
+</div>
