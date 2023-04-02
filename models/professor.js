@@ -6,9 +6,9 @@ const professorSchema = new Schema({
     type: String,
     required: true
   },
-  uid:{
+  uid: {
     type: String,
-    required:true 
+    required: true
   },
   password: {
     type: String,
@@ -21,17 +21,16 @@ const professorSchema = new Schema({
   class: {
     type: String,
   },
-  att:[{
-    type:Schema.Types.ObjectId,
-    ref:'Student'
+  att: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Student'
   }]
 });
 
-if(!mongoose.models.Professor)
-{
-  const professor = mongoose.model('Professor',professorSchema);
+if (!mongoose.models.Professor) {
+  const professor = mongoose.model('Professor', professorSchema);
   module.exports = professor;
 }
-else{
+else {
   module.exports = mongoose.models.Professor;
 }

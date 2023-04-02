@@ -12,24 +12,23 @@ const lectureHallSchema = new mongoose.Schema({
   class: {
     type: String,
   },
-  passcode:{
+  passcode: {
     type: String
   },
   occupiedBy: {
     type: String,
-    default:null
+    default: null
   },
   classTime: {
-    type:String,
-    default:null
+    type: String,
+    default: null
   }
 });
 
-if(!mongoose.models.LectureHall)
-{
-  const lectHall = mongoose.model('LectureHall',lectureHallSchema);
+if (!mongoose.models.LectureHall) {
+  const lectHall = mongoose.model('LectureHall', lectureHallSchema);
   module.exports = lectHall;
 }
-else{
+else {
   module.exports = mongoose.models.LectureHall
 }

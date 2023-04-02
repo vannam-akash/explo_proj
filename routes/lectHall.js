@@ -1,11 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const app = express();
 
-const Professor = require('../models/professor');
-const LectureHall = require('../models/lectHall');
-const AppError = require('../utility/appError');
 const controllers = require('../controllers/lectHall')
 
 router.route('/')

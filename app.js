@@ -3,8 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-var methodOverride = require('method-override')
-const AppError = require('./utility/appError')
+var methodOverride = require('method-override');
+const AppError = require('./utility/appError');
 const morgan = require('morgan');
 const path = require('path');
 const ejsMate = require('ejs-mate');
@@ -20,19 +20,22 @@ const clearAttendance = require('./utility/clearAttendance');
 const updateLtProfStatus = require('./utility/updateLtProfStatus');
 
 
+// Middleware
+
+
 // Updating codes every 30 secs
-setInterval(refreshPasscode,30*1000);
+setInterval(refreshPasscode, 30 * 1000);
 
 
 // Clearing attendance 
-setInterval(clearAttendance,65*60*1000);
+setInterval(clearAttendance, 65 * 60 * 1000);
 
 
 // Code to set the time offset and 1 hr interval for running this function
 let t = new Date();
 let min = t.getMinutes();
 let sec = t.getSeconds();
-if(min<50){
+if (min < 50) {
   let difMin = 50 - min - 1;
   let difSec = 60 - sec;
   let timeout = difMin * 60 * 1000 + difSec * 1000;
@@ -42,9 +45,9 @@ if(min<50){
 }
 else {
   let difMin = 60 - min - 1;
-  let difSec = 60 - sec; 
+  let difSec = 60 - sec;
   let timeout = (difMin + 60) * 60 * 1000 + difSec * 1000;
-  setTimeout(()=>{
+  setTimeout(() => {
     setInterval(updateLtProfStatus, 1000 * 60 * 60);
   }, timeout);
 }
@@ -66,11 +69,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // Initialize and use session middleware
-const sessionOptions = { 
-  secret: 'thisisnotagoodsecret', 
-  resave: false, 
-  saveUninitialized: false 
-};  
+const sessionOptions = {
+  secret: 'thisisnotagoodsecret',
+  resave: false,
+  saveUninitialized: false
+};
 app.use(session(sessionOptions));
 
 
@@ -83,13 +86,13 @@ main().catch(err => console.log('There was an error connecting to mongoose :(', 
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/proj');
   console.log('Sucessfully connected to mongoose!')
-}  
+}
 
 
 // Requiring routes
-app.use('/lectHalls',require('./routes/lectHall'));
-app.use('/students',require('./routes/student'));
-app.use('/professors',require('./routes/professor'));
+app.use('/lectHalls', require('./routes/lectHall'));
+app.use('/students', require('./routes/student'));
+app.use('/professors', require('./routes/professor'));
 
 
 // 404 Route
@@ -99,9 +102,10 @@ app.all('*', (req, res, next) => {
 
 
 // Error handler
-app.use((err, req, res, next)=>{
-  console.log("Got inside the error handler!")
-  res.status(500).render('error',{err});
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = 'Oh No, Something Went Wrong!';
+  res.status(statusCode).render('error', { err });
 });
 
 

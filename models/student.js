@@ -15,10 +15,10 @@ const studentSchema = new Schema({
   }
 });
 
-if(!mongoose.models.Student){
-  const student = mongoose.model('Student',studentSchema);
+if (!mongoose.models.Student) {
+  const student = mongoose.model('Student', studentSchema);
   module.exports = student;
 }
-else{
+else {
   module.exports = mongoose.models.Student;
 }
