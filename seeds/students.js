@@ -14,23 +14,29 @@ async function main() {
     let stud1 = new Student ({
         name:"Rohan",
         rollNo: 1,
-        password: "rohan"
+        password: "1"
     });
     await stud1.save();
 
     let stud2 = new Student ({
         name:"Raj",
         rollNo: 2,
-        password: "raj"
+        password: "2"
     });
     await stud2.save();
 
     let stud3 = new Student ({
         name:"Prem",
         rollNo: 3,
-        password: "prem"
+        password: "3"
     });
     await stud3.save();
     
+    let stud4 = new Student ({
+        name:"Aditya",
+        rollNo: 4,
+        password: "4"
+    });
+    await stud4.save();
 };
 

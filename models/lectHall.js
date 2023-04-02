@@ -3,16 +3,25 @@ const mongoose = require('mongoose');
 const lectureHallSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
   },
   status: {
     type: String,
     enum: ['Available', 'Occupied'],
     default: 'Available'
   },
+  class: {
+    type: String,
+  },
+  passcode:{
+    type: String
+  },
   occupiedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Class'
+    type: String,
+    default:null
+  },
+  classTime: {
+    type:String,
+    default:null
   }
 });
 

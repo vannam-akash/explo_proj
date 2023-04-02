@@ -1,36 +1,28 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+
+const Professor = require('../models/professor');
+const LectureHall = require('../models/lectHall');
+
 const studentSchema = new Schema({
   name: {
-    type: String,
-    required: true
+    type: String
   },
-  // email: {
-  //   type: String,
-  //   // required: true,
-  //   unique: true
-  // },
   rollNo: {
     type: Number,
     required: true,
-    // unique: true
   },
   password: {
     type: String,
     required: true
-  },
-  classes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Class'
-  }],
+  }
 });
 
-if(!mongoose.models.Student)
-{
-  const Student = mongoose.model('Student', studentSchema);
-  module.exports = Student;
+if(!mongoose.models.Student){
+  const student = mongoose.model('Student',studentSchema);
+  module.exports = student;
 }
 else{
-  module.exports = Student;
+  module.exports = mongoose.models.Student;
 }
