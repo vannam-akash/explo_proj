@@ -15,12 +15,55 @@ const app = express();
 app.use(methodOverride('_method'))
 
 
+
+
+
 // Middleware
 
 
 // Requiring models
 const Professor = require('./models/professor');
 const LectureHall = require('./models/lectHall');
+const Student = require('./models/student');
+const Passcode = require('./models/passcode');
+
+//updating codes every 30 secs
+async function func1(){
+  
+  const pg4=await Passcode.findOne({name:"pass4"});
+  const pg5=await Passcode.findOne({name:"pass5"});
+  const pg6=await Passcode.findOne({name:"pass6"});
+  const pg7=await Passcode.findOne({name:"pass7"});
+
+  pg4.pass="4"+Math.floor(Math.random()*1000+1);
+  pg5.pass="5"+Math.floor(Math.random()*1000+1);
+  pg6.pass="6"+Math.floor(Math.random()*1000+1);
+  pg7.pass="7"+Math.floor(Math.random()*1000+1);
+
+  await pg4.save();
+  await pg5.save();
+  await pg6.save();
+  await pg7.save();
+
+}
+setInterval(func1,30*1000);
+
+
+async function func2(){
+  
+  const prof=await Professor.find({});
+  for(x of prof){
+    
+    x.att=[];
+    console.log(x);
+    await x.save();
+  }
+ 
+}
+setInterval(func2,65*60*1000);
+
+
+
 
 // Function for updating the lt and professor status
 async function update(){
@@ -70,7 +113,7 @@ else {
 }
 
 // Set view engine to EJS
-app.engine('ejs', ejsMate)
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -89,6 +132,8 @@ const sessionOptions = {
 };  
 app.use(session(sessionOptions));
 
+
+// app.get('/admin',)
 
 // Morgan tiny
 app.use(morgan('tiny'));

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+
+const Professor = require('../models/professor');
+const LectureHall = require('../models/lectHall');
+
 const studentSchema = new Schema({
   name: {
     type: String
