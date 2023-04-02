@@ -88,6 +88,9 @@ async function main() {
   console.log('Sucessfully connected to mongoose!')
 }
 
+app.get('/',(req,res) =>{
+  res.render('home');
+});
 
 // Requiring routes
 app.use('/lectHalls', require('./routes/lectHall'));

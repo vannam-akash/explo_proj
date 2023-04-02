@@ -1,6 +1,4 @@
-const express = require('express');
 const catchAsync = require('../utility/catchAsync');
-const AppError = require('../utility/appError');
 
 // Requiring professor model and lecture hall models
 const Professor = require('../models/professor');
@@ -12,7 +10,7 @@ module.exports = {
         let profID = req.session.profId || null;
         let prof = null;
         if (profID) { prof = await Professor.findById(profID); }
-        res.render('lectHalls/index', { lts, prof, Professor });
+        res.render('lectHalls/index', { lts, prof});
     }),
     bookLt: catchAsync(async (req, res) => {
         const { lid, profid } = req.params;
@@ -34,9 +32,5 @@ module.exports = {
         const prof = await Professor.findById(profid);
         const lts = await LectureHall.find();
         res.render('lectHalls/index', { lts, prof });
-    }),
-    displayError: (req, res) => {
-        let err = new AppError("This is an error!!")
-        res.render('error', { err });
-    }
+    })
 }

@@ -6,12 +6,8 @@ const Passcode = require('../models/passcode');
 
 // Requiring files
 const AppError = require('../utility/appError');
+const catchAsync = require('../utility/catchAsync');
 
-function catchAsync(fn) {
-    return function (req, res, next) {
-        fn(req, res, next).catch(e => next(e))
-    }
-}
 module.exports = {
     renderAttendanceForm: catchAsync(async (req, res, next) => {
         res.render('students/attendance');

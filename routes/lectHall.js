@@ -11,8 +11,4 @@ router.route('/:lid/prof/:profid')
 
 router.route('/prof/:profid')
     .get(controllers.renderLtProf);
-
-router.route('/error')
-    .get(controllers.displayError);
-
 module.exports = router;
