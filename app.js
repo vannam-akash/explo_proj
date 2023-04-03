@@ -27,6 +27,10 @@ const LectureHall = require('./models/lectHall');
 const Student = require('./models/student');
 const Passcode = require('./models/passcode');
 
+
+
+
+
 //updating codes every 30 secs
 async function func1(){
   

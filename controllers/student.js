@@ -7,6 +7,37 @@ const Professor = require('../models/professor');
 const LectureHall = require('../models/lectHall');
 const Passcode = require('../models/passcode');
 
+
+function getDistance(point1, point2) {
+    const R = 6371; // Earth's radius in kilometers
+    const lat1 = toRadians(point1.lat);
+    const lat2 = toRadians(point2.lat);
+    const latDiff = toRadians(point2.lat - point1.lat);
+    const lonDiff = toRadians(point2.lon - point1.lon);
+  
+    const a =
+      Math.sin(latDiff / 2) * Math.sin(latDiff / 2) +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(lonDiff / 2) * Math.sin(lonDiff / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  
+    return R * c;
+  }
+  
+  function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+  }
+
+const g4={lat:25.262618307398068, lon:82.99195307752026};
+const g5={lat:25.262429775065673, lon:82.99211496156191};
+const g6={lat:25.262293231167845, lon:82.99217598068392};
+const g7={lat:25.262193134497135, lon:82.99221779381561};
+
+const d_g4g5= 0.021597932308693058;  
+const dg2={lat:25.2640618, long:82.9846917};
+
+
+
+
 function catchAsync(fn) {
     return function (req, res, next) {
         fn(req, res, next).catch(e => next(e))
@@ -49,12 +80,15 @@ function catchAsync(fn) {
 
          markAttendance : catchAsync(async(req,res,next)=>{
 
-            const {rollNo, password, passcode} = req.body;
-            //const codes = await Passcode.find({});
+            const {rollNo, password, passcode,latitude,longitude} = req.body;
+           console.log(req.body);
             const pg4=await Passcode.findOne({name:"pass4"});
             const pg5=await Passcode.findOne({name:"pass5"});
             const pg6=await Passcode.findOne({name:"pass6"});
             const pg7=await Passcode.findOne({name:"pass7"});
+
+            if(!(latitude && longitude)){let x=0;console.log("no location");return res.redirect(`/students/verify/${x}`);}
+            
             
             const stud = await Student.findOne({rollNo,password});
             if(!stud) throw new Error({message:"Sorry could not find student!!"});
@@ -63,6 +97,10 @@ function catchAsync(fn) {
             console.log(pg5," ",pg5.pass);
              if(passcode[0].toString()=="4"){
                 let x;
+                if(getDistance(g4,{lat:latitude,lon:longitude})>2*d_g4g5){
+                    x=0;
+                    return res.redirect(`/students/verify/${x}`);
+                }
                 if(pg4.pass.toString()==passcode.toString()){
                     console.log("4 hit");
                      //const name = g4.occupiedBy;
@@ -81,6 +119,11 @@ function catchAsync(fn) {
                 if(pg5.pass.toString()==passcode.toString()){
                     console.log("5 hit");
                      //const name = g4.occupiedBy;
+                     console.log(getDistance(g5,{lat:latitude,lon:longitude}));
+                     if(getDistance(g5,{lat:latitude,lon:longitude})>2*d_g4g5){
+                        x=0;
+                        return res.redirect(`/students/verify/${x}`);
+                    }
                      
                      const hall= await LectureHall.findOne({name:'G5'});
                      console.log(hall);
@@ -96,6 +139,10 @@ function catchAsync(fn) {
                 if(pg6.pass.toString()==passcode.toString()){
                     console.log("6 hit");
                      //const name = g4.occupiedBy;
+                     if(getDistance(g6,{lat:latitude,lon:longitude})>2*d_g4g5){
+                        x=0;
+                        return res.redirect(`/students/verify/${x}`);
+                    }
                      
                      const hall= await LectureHall.findOne({name:'G6'});
                      console.log(hall);
@@ -112,7 +159,10 @@ function catchAsync(fn) {
                 if(pg7.pass.toString()==passcode.toString()){
                     console.log("7 hit");
                      //const name = g4.occupiedBy;
-                     
+                     if(getDistance(g7,{lat:latitude,lon:longitude})>2*d_g4g5){
+                        x=0;
+                        return res.redirect(`/students/verify/${x}`);
+                    }
                      const hall= await LectureHall.findOne({name:'G7'});
                      console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
