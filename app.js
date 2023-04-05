@@ -23,6 +23,38 @@ const updateLtProfStatus = require('./utility/updateLtProfStatus');
 // Middleware
 
 
+
+// Requiring models
+const Professor = require('./models/professor');
+const LectureHall = require('./models/lectHall');
+const Student = require('./models/student');
+const Passcode = require('./models/passcode');
+
+
+
+
+
+//updating codes every 30 secs
+async function func1(){
+  
+  const pg4=await Passcode.findOne({name:"pass4"});
+  const pg5=await Passcode.findOne({name:"pass5"});
+  const pg6=await Passcode.findOne({name:"pass6"});
+  const pg7=await Passcode.findOne({name:"pass7"});
+
+  pg4.pass="4"+Math.floor(Math.random()*1000+1);
+  pg5.pass="5"+Math.floor(Math.random()*1000+1);
+  pg6.pass="6"+Math.floor(Math.random()*1000+1);
+  pg7.pass="7"+Math.floor(Math.random()*1000+1);
+
+  await pg4.save();
+  await pg5.save();
+  await pg6.save();
+  await pg7.save();
+
+}
+setInterval(func1,30*1000);
+
 // Updating codes every 30 secs
 setInterval(refreshPasscode, 30 * 1000);
 
