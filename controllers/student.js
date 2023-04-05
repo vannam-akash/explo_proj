@@ -1,7 +1,4 @@
-const express = require('express');
-
-
-// Requiring Student model
+// Requiring models
 const Student = require('../models/student');
 const Professor = require('../models/professor');
 const LectureHall = require('../models/lectHall');
@@ -37,7 +34,7 @@ const dg2={lat:25.2640618, long:82.9846917};
 
 
 
-
+/*
 function catchAsync(fn) {
     return function (req, res, next) {
         fn(req, res, next).catch(e => next(e))
@@ -48,37 +45,50 @@ function catchAsync(fn) {
          renderAttendanceForm :catchAsync(async(req,res,next) => {
             res.render('students/attendance');
 
-        }),
+*/
 
-         verify:catchAsync(async(req,res,next) => {
-            const {x}=req.params;
-            console.log("Verify route hit");
-            // passcodes.func(passcodes.passes);
-            if(x==1){const pg4=await Passcode.findOne({name:"pass4"});
-            const pg5=await Passcode.findOne({name:"pass5"});
-            const pg6=await Passcode.findOne({name:"pass6"});
-            const pg7=await Passcode.findOne({name:"pass7"});
+// Requiring files
+const AppError = require('../utility/appError');
+const catchAsync = require('../utility/catchAsync');
 
-            pg4.pass="4"+Math.floor(Math.random()*1000+1);
-            pg5.pass="5"+Math.floor(Math.random()*1000+1);
-            pg6.pass="6"+Math.floor(Math.random()*1000+1);
-            pg7.pass="7"+Math.floor(Math.random()*1000+1);
+module.exports = {
+    renderAttendanceForm: catchAsync(async (req, res, next) => {
+        res.render('students/attendance');
+    }),
+
+    verify: catchAsync(async (req, res, next) => {
+        const { x } = req.params;
+        console.log("Verify route hit");
+        // passcodes.func(passcodes.passes);
+        if (x == 1) {
+            const pg4 = await Passcode.findOne({ name: "pass4" });
+            const pg5 = await Passcode.findOne({ name: "pass5" });
+            const pg6 = await Passcode.findOne({ name: "pass6" });
+            const pg7 = await Passcode.findOne({ name: "pass7" });
+
+            pg4.pass = "4" + Math.floor(Math.random() * 1000 + 1);
+            pg5.pass = "5" + Math.floor(Math.random() * 1000 + 1);
+            pg6.pass = "6" + Math.floor(Math.random() * 1000 + 1);
+            pg7.pass = "7" + Math.floor(Math.random() * 1000 + 1);
 
             await pg4.save();
             await pg5.save();
             await pg6.save();
-            await pg7.save();}
+            await pg7.save();
+        }
 
+        if (x.toString() == "1") {
+            return res.render("students/attendanceSuccess");
+        }
+        else {
+            let err = new AppError("Attendance Marking Failed!!");
+            next(err);
+        }
+    }),
 
-            
-            if(x.toString()=="1"){
-                res.send("Attendance Successfully Marked");
-                
-            }
-            else res.send("Attendance Marking Failed");
-        }),
+    markAttendance: catchAsync(async (req, res, next) => {
 
-         markAttendance : catchAsync(async(req,res,next)=>{
+      
 
             const {rollNo, password, passcode,latitude,longitude} = req.body;
            console.log(req.body);
@@ -184,22 +194,6 @@ function catchAsync(fn) {
             console.log(req.body);
           
 
-            
-            // let codeGen=catchAsync(async(req,res,next) => {
-            //     console.log("codeGen route hit");
-            //     console.log(codeGen());
-            //     codeGen();
-            // });
-           
-            
-        })
-        
-            
-        // return {
-        //     renderAttendanceForm:renderAttendanceForm,
-        //     verify:verify,
-        //     markAttendance:markAttendance
-        // };
 
-   };
-    
+            })
+        };

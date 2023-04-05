@@ -1,18 +1,14 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-//const Professor = require('../models/professor');
-const LectureHall = require('../models/lectHall');
-const Student = require('../models/student.js');
-
 const professorSchema = new Schema({
   name: {
     type: String,
     required: true
   },
-  uid:{
+  uid: {
     type: String,
-    required:true 
+    required: true
   },
   password: {
     type: String,
@@ -25,17 +21,16 @@ const professorSchema = new Schema({
   class: {
     type: String,
   },
-  att:[{
-    type:Schema.Types.ObjectId,
-    ref:'Student'
+  att: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Student'
   }]
 });
 
-if(!mongoose.models.Professor)
-{
-  const professor = mongoose.model('Professor',professorSchema);
+if (!mongoose.models.Professor) {
+  const professor = mongoose.model('Professor', professorSchema);
   module.exports = professor;
 }
-else{
+else {
   module.exports = mongoose.models.Professor;
 }

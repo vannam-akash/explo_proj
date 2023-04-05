@@ -3,18 +3,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 mt-5">
-        <div class="card">
+        <div class="card bg-dark-subtle">
           <div class="card-header bg-dark text-white">
             <h4>Professor Login</h4>
           </div>
           <div class="card-body">
             <form action="/professors/login" method="POST">
               <div class="form-group">
-                <label for="uid"class="mt-2"><h6>LOGIN ID:</h1></label>
+                <label for="uid" class="mt-2">
+                  <h6>LOGIN ID:</h1>
+                </label>
                 <input type="text" class="form-control" id="uid" name="uid" required>
               </div>
               <div class="form-group">
-                <label for="password" class="mt-2"><h6>PASSWORD:</h1></label>
+                <label for="password" class="mt-2">
+                  <h6>PASSWORD:</h1>
+                </label>
                 <input type="password" class="form-control" id="password" name="password" required>
               </div>
               <button type="submit" class="btn btn-dark btn-block mt-2">Login</button>

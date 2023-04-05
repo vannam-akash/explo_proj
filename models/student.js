@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-
-const Professor = require('../models/professor');
-const LectureHall = require('../models/lectHall');
-
 const studentSchema = new Schema({
   name: {
     type: String
@@ -19,10 +15,10 @@ const studentSchema = new Schema({
   }
 });
 
-if(!mongoose.models.Student){
-  const student = mongoose.model('Student',studentSchema);
+if (!mongoose.models.Student) {
+  const student = mongoose.model('Student', studentSchema);
   module.exports = student;
 }
-else{
+else {
   module.exports = mongoose.models.Student;
 }
