@@ -23,7 +23,7 @@ const updateLtProfStatus = require('./utility/updateLtProfStatus');
 // Middleware
 
 
-<<<<<<< HEAD
+
 // Requiring models
 const Professor = require('./models/professor');
 const LectureHall = require('./models/lectHall');
@@ -54,10 +54,9 @@ async function func1(){
 
 }
 setInterval(func1,30*1000);
-=======
+
 // Updating codes every 30 secs
 setInterval(refreshPasscode, 30 * 1000);
->>>>>>> 7ff7ffa2140926c67c07d9fd0f3ac57baa6522ed
 
 
 // Clearing attendance 
