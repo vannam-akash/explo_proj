@@ -45,10 +45,11 @@
   <script>
     function updateClock() {
       let now = new Date();
+      let hours_24 = now.getHours();
       let hours = now.getHours() % 12 || 12;
       let minutes = ("0" + now.getMinutes()).slice(-2);
       let seconds = ("0" + now.getSeconds()).slice(-2);
-      let ampm = hours < 12 ? "AM" : "PM";
+      let ampm = hours_24 < 12 ? "AM" : "PM";
       let timeString = hours + ":" + minutes + ":" + seconds + " " + ampm;
       document.getElementById("clock").innerHTML = "Time: " + timeString;
     }
