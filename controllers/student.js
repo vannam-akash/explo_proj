@@ -120,7 +120,7 @@ function catchAsync(fn) {
                     console.log("5 hit");
                      //const name = g4.occupiedBy;
                      console.log(getDistance(g5,{lat:latitude,lon:longitude}));
-                     if(getDistance(g5,{lat:latitude,lon:longitude})>2*d_g4g5){
+                     if(getDistance(g5,{lat:latitude,lon:longitude})>2.5*d_g4g5){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
