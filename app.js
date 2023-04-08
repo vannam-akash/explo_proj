@@ -11,7 +11,8 @@ const ejsMate = require('ejs-mate');
 
 
 const app = express();
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.set('trust proxy', true);
 
 
 // Requiring necessary Functions
@@ -60,7 +61,7 @@ setInterval(refreshPasscode, 30 * 1000);
 
 
 // Clearing attendance 
-setInterval(clearAttendance, 65 * 60 * 1000);
+setInterval(clearAttendance,60 * 60 * 1000);
 
 
 // Code to set the time offset and 1 hr interval for running this function

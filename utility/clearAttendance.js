@@ -7,6 +7,7 @@ async function clearAttendance() {
   for (x of prof) {
 
     x.att = [];
+    x.ip = [];
     console.log(x);
     await x.save();
   }

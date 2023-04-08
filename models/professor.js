@@ -24,6 +24,9 @@ const professorSchema = new Schema({
   att: [{
     type: Schema.Types.ObjectId,
     ref: 'Student'
+  }],
+  ip:[{
+    type:String
   }]
 });
 
