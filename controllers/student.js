@@ -10,27 +10,27 @@ function validatedIp(arr,ip){
     else return true;
 }
 
-async function preventProxy(obj){
-    let {prof,x,req} = obj;
-    console.log(prof,x);
-    const parseIp = (req) =>
-    req.headers['x-forwarded-for']?.split(',').shift()
-    || req.socket?.remoteAddress
+// async function preventProxy(obj){
+//     let {prof,x,req} = obj;
+//     console.log(prof,x);
+//     const parseIp = (req) =>
+//     req.headers['x-forwarded-for']?.split(',').shift()
+//     || req.socket?.remoteAddress
     
-    const reqIp = parseIp(req);
-    console.log("IP inside the hall is :",reqIp);
-    if(!validatedIp(prof.ip,reqIp)){
-        console.log("Didn't allow proxy!!!")
-        x=0;
-    }
-    else{
-        console.log("Pushing the ip in the array!!")
-        prof.ip.push(reqIp.toString());
-        await prof.save();
-    }
-    console.log(prof,x);
-    return x;
-}
+//     const reqIp = parseIp(req);
+//     console.log("IP inside the hall is :",reqIp);
+//     if(!validatedIp(prof.ip,reqIp)){
+//         console.log("Didn't allow proxy!!!")
+//         x=0;
+//     }
+//     else{
+//         console.log("Pushing the ip in the array!!")
+//         prof.ip.push(reqIp.toString());
+//         await prof.save();
+//     }
+//     console.log(prof,x);
+//     return x;
+// }
 
 function getDistance(point1, point2) {
     const R = 6371; // Earth's radius in kilometers
