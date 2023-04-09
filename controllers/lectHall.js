@@ -9,7 +9,7 @@ module.exports = {
         const lts = await LectureHall.find();
         let profID = req.session.profId || null;
         let prof = null;
-        if (profID) { prof = await Professor.findById(profID); }
+        if (profID) { prof = await Professor.findById(profID).populate('attlogs.attlog'); }
         res.render('lectHalls/index', { lts, prof});
     }),
     bookLt: catchAsync(async (req, res) => {

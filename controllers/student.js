@@ -10,27 +10,27 @@ function validatedIp(arr,ip){
     else return true;
 }
 
-async function preventProxy(obj){
-    let {prof,x,req} = obj;
-    console.log(prof,x);
-    const parseIp = (req) =>
-    req.headers['x-forwarded-for']?.split(',').shift()
-    || req.socket?.remoteAddress
+// async function preventProxy(obj){
+//     let {prof,x,req} = obj;
+//     console.log(prof,x);
+//     const parseIp = (req) =>
+//     req.headers['x-forwarded-for']?.split(',').shift()
+//     || req.socket?.remoteAddress
     
-    const reqIp = parseIp(req);
-    console.log("IP inside the hall is :",reqIp);
-    if(!validatedIp(prof.ip,reqIp)){
-        console.log("Didn't allow proxy!!!")
-        x=0;
-    }
-    else{
-        console.log("Pushing the ip in the array!!")
-        prof.ip.push(reqIp.toString());
-        await prof.save();
-    }
-    console.log(prof,x);
-    return x;
-}
+//     const reqIp = parseIp(req);
+//     console.log("IP inside the hall is :",reqIp);
+//     if(!validatedIp(prof.ip,reqIp)){
+//         console.log("Didn't allow proxy!!!")
+//         x=0;
+//     }
+//     else{
+//         console.log("Pushing the ip in the array!!")
+//         prof.ip.push(reqIp.toString());
+//         await prof.save();
+//     }
+//     console.log(prof,x);
+//     return x;
+// }
 
 function getDistance(point1, point2) {
     const R = 6371; // Earth's radius in kilometers
@@ -137,10 +137,10 @@ module.exports = {
             if(!stud) throw new Error({message:"Sorry could not find student!!"});
             req.session.studId = stud._id;
             console.log(passcode);
-            console.log(pg5," ",pg5.pass);
+            console.log(pg6," ",pg6.pass);
              if(passcode[0].toString()=="4"){
                 let x;
-                if(getDistance(g4,{lat:latitude,lon:longitude})>2*d_g4g5){
+                if(!getDistance(g4,{lat:latitude,lon:longitude})){
                     x=0;
                     return res.redirect(`/students/verify/${x}`);
                 }
@@ -151,7 +151,9 @@ module.exports = {
                      const hall= await LectureHall.findOne({name:'G4'});
                      console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
-                     if(prof){prof.att.push(stud._id);await prof.save(); x=1;preventProxy({prof,x});}
+                     if(prof){prof.att.push(stud._id);await prof.save(); x=1;
+                            //preventProxy({prof,x});
+                        }
                     //  Code to prevent proxy
                     if(prof){
                         const parseIp = (req) =>
@@ -182,7 +184,7 @@ module.exports = {
                     console.log("5 hit");
                      //const name = g4.occupiedBy;
                      console.log(getDistance(g5,{lat:latitude,lon:longitude}));
-                     if(getDistance(g5,{lat:latitude,lon:longitude})>2.5*d_g4g5){
+                     if(!getDistance(g5,{lat:latitude,lon:longitude})){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
@@ -190,7 +192,9 @@ module.exports = {
                      const hall= await LectureHall.findOne({name:'G5'});
                      console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
-                     if(prof){prof.att.push(stud._id);await prof.save(); x=1;preventProxy({prof,x});}
+                     if(prof){prof.att.push(stud._id);await prof.save(); x=1;
+                            // preventProxy({prof,x});
+                        }
                     //  Code to prevent proxy
                     if(prof){
                         const parseIp = (req) =>
@@ -219,7 +223,7 @@ module.exports = {
                 if(pg6.pass.toString()==passcode.toString()){
                     console.log("6 hit");
                      //const name = g4.occupiedBy;
-                     if(getDistance(g6,{lat:latitude,lon:longitude})>2*d_g4g5){
+                     if(!getDistance(g6,{lat:latitude,lon:longitude})){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
@@ -227,7 +231,9 @@ module.exports = {
                      const hall= await LectureHall.findOne({name:'G6'});
                      console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
-                     if(prof){prof.att.push(stud._id);await prof.save(); x=1;preventProxy({prof,x});}
+                     if(prof){prof.att.push(stud._id);await prof.save(); x=1;
+                            //preventProxy({prof,x});
+                        }
                     //  Code to prevent proxy
                     if(prof){
                         const parseIp = (req) =>
@@ -258,7 +264,7 @@ module.exports = {
                 if(pg7.pass.toString()==passcode.toString()){
                     console.log("7 hit");
                      //const name = g4.occupiedBy;
-                     if(getDistance(g4,{lat:latitude,lon:longitude})>2*d_g4g5){
+                     if(!getDistance(g4,{lat:latitude,lon:longitude})){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
