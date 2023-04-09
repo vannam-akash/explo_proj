@@ -18,6 +18,6 @@ module.exports = {
     }),
     logout: catchAsync(async (req, res, next) => {
         req.session.profId = null;
-        res.redirect('/lectHalls');
+        res.redirect('/lectHalls'); 
     })
 }
