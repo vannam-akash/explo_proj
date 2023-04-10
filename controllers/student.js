@@ -140,7 +140,7 @@ module.exports = {
             console.log(pg6," ",pg6.pass);
              if(passcode[0].toString()=="4"){
                 let x;
-                if(!getDistance(g4,{lat:latitude,lon:longitude})){
+                if(getDistance(g4,{lat:latitude,lon:longitude})>2.5*d_g4g5){
                     x=0;
                     return res.redirect(`/students/verify/${x}`);
                 }
@@ -184,7 +184,7 @@ module.exports = {
                     console.log("5 hit");
                      //const name = g4.occupiedBy;
                      console.log(getDistance(g5,{lat:latitude,lon:longitude}));
-                     if(!getDistance(g5,{lat:latitude,lon:longitude})){
+                     if(getDistance(g5,{lat:latitude,lon:longitude})>2.5*d_g4g5){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
@@ -223,7 +223,7 @@ module.exports = {
                 if(pg6.pass.toString()==passcode.toString()){
                     console.log("6 hit");
                      //const name = g4.occupiedBy;
-                     if(!getDistance(g6,{lat:latitude,lon:longitude})){
+                     if(getDistance(g6,{lat:latitude,lon:longitude})>2.5*d_g4g5){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
@@ -264,7 +264,7 @@ module.exports = {
                 if(pg7.pass.toString()==passcode.toString()){
                     console.log("7 hit");
                      //const name = g4.occupiedBy;
-                     if(!getDistance(g4,{lat:latitude,lon:longitude})){
+                     if(getDistance(g4,{lat:latitude,lon:longitude})>2.5*d_g4g5){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
