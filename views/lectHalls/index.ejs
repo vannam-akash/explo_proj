@@ -1,79 +1,87 @@
 <% layout('layouts/boilerplate') -%>
 
-  <div class="container mt-5">
-    <!-- Function to check if required conditions are met or not for showing the button -->
-    <% function bookValid(prof) { 
-      if(!prof) return false; 
-      if(prof.isTakingClass) return false; 
-      let t=new Date(); let
-      min=t.getMinutes(); 
-      if(min>=0 && min<59)return true; 
-      else return false; 
-      } 
-    %>
-    <h1 class="text-center mb-5">Lecture Hall Status</h1>
+<section id="pricing" class="pricing">
+      <!-- Function to check if required conditions are met or not for showing the button -->
+      <% function bookValid(prof) { 
+        if(!prof) return false; 
+        if(prof.isTakingClass) return false; 
+        let t=new Date(); let
+        min=t.getMinutes(); 
+        if(min>=0 && min<59)return true; 
+        else return false; 
+        } 
+      %>
+
+
+<div class="container">
+  
+  <div class="section-title">
+    <h2>Lecture Hall Status</h2>
     <% if(prof) {%>
-      <h4 class="text-center mb-5">Professor : <%= prof.name %></h4>
-    <% } %>
+      <h4>Professor : <%= prof.name %></h4>
+      <% } %>
+    </div>
+
     <div class="row">
       <% for (let i=0; i <=3; i++) { %>
-        <div class="col-md-4 mb-4">
-          <div class="card h-100" style="background-color: black ; color: white;">
-            <div class="card-body">
-              <h5 class="card-title"><%= lts[i].name %></h5> <br>
-              <p id="status" class="card-text"><b>Status: </b><%= lts[i].status %></p>
-              <% if (lts[i].occupiedBy) { %>
-                <p class="card-text"><b> Occupied By: </b><%= lts[i].occupiedBy %></p>
-                <p class="card-text"><b> Course: </b><%= lts[i].class %></p>
-                <p class="card-text"><b> Class Time: </b><%= lts[i].classTime %></p>
-                <% }else if(bookValid(prof)){%>
-                  <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= prof._id %>?_method=PUT" method="POST">
-                    <button type="submit" class="btn btn-success">Book</button>
-                  </form>
-                <% } %>
+
+          <div class="col-md-4 mt-4 mt-lg-0 mb-5">
+            <div class="box h-100 text-white">
+              <h3><%= lts[i].name %></h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4> -->
+              <ul>
+                <li><b>Status: </b><%= lts[i].status %></li>
+                <% if (lts[i].occupiedBy) { %>
+                  <p class="card-text"><b> Occupied By: </b><%= lts[i].occupiedBy %></p>
+                  <p class="card-text"><b> Course: </b><%= lts[i].class %></p>
+                  <p class="card-text"><b> Class Time: </b><%= lts[i].classTime %></p>
+                  <% }else if(bookValid(prof)){%>
+                    <form action="/lectHalls/<%= lts[i]._id%>/prof/<%= prof._id %>?_method=PUT" method="POST">
+                      <button type="submit" class="btn-buy">Book</button>
+                    </form>
+                    <% } %>
+              </ul>
+              <!-- <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div> -->
             </div>
           </div>
-        </div>
       <% } %>
 
-    <div class>
-      <h4 class="text-center" id="clock"></h4>
-    </div>
   </div>
-</div>
+  <div class>
+    <h4 class="text-center" id="clock"></h4>
+  </div>
+</section>
 
-    <div class="row">
-      <% if(prof){ %><h1 class="mt-4">Attendance Logs</h1><% } %>
-      <% if(prof)for(x of prof.attlogs){ %>
-        <div class="col-md-6">
-          <div class="card text-black bg-light mb-3">
-            <div class="card-body">
-              <h4 class="card-title"><%=x.when%></h4>
-              <p class="card-text">
-                <%if(x.attlog)for(y of x.attlog){%>
-                  <div class="d-flex justify-content-between">
-                    <span><%= y.name %></span>
-                    <span><%= y.rollNo %></span>
-                  </div>
-                <% } %>
-              </p>
-            </div>
-          </div>
-        </div>
-      <% } %>
-    </div>
-    
-
-
- 
-
-    
-    
-   
- 
-
-
-
+<% if(prof){ %>
+  <hr color="black">
+      <h1 class="mb-4 mt-5 text-center">Attendance Logs</h1>
+      <div class="ms-5 me-5">
+      <% for(x of prof.attlogs){ %>
+          <h4>Date:  <%=x.when.toLocaleDateString()%>,  Time:  <%=x.when.toLocaleTimeString()%>  </h4>
+          <% if (x.attlog) {%>
+            <table class="table table-hover table-dark table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(y of x.attlog){%>
+              <tr>
+                <td><%= y.name %></td>
+                <td><%= y.rollNo %></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <% } %>
+          <hr color="#000">
+          <% } %>
+        </div> 
+        <% } %>   
 
 
   <script>

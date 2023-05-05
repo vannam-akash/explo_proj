@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') -%>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 mt-5">
         <div class="card bg-dark-subtle">
@@ -27,7 +27,47 @@
         </div>
       </div>
     </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  </div> -->
+
+  <section class="vh-75 gradient-custom">
+    <div class="container h-25">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div style="background-color: rgb(10, 10, 10);" class="card text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mt-4 pb-5">
+                <form action="/professors/login" method="POST">
+
+                  <h2>Professor Login</h2>
+                  <p class="text-white-50 mb-5">Please enter your Login ID and Password!</p>
+    
+                  <div class="form-group">
+                    <label for="uid" class="mt-0">
+                      <h6>LOGIN ID:</h1>
+                    </label>
+                    <input type="text" class="form-control" id="uid" name="uid" required>
+                  </div>
+    
+                  <div class="form-group">
+                    <label for="password" class="mt-4">
+                      <h6>PASSWORD:</h1>
+                    </label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
+
+                  <button class="btn btn-outline-light mt-5" type="submit">Login</button>
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->

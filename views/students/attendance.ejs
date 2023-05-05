@@ -26,43 +26,14 @@
     
   </script>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 mt-5">
         <div class="card bg-dark-subtle" >
-          <div class="card-header bg-dark text-white">
-            <h4>Mark Attendance</h4>
-          </div>
+          
           <div class="card-body">
 
-            <form id="myForm" action='/students/attendance' method="POST">
-              <div class="form-group">
-                <label for="rollno" class="mt-2">
-                  <h6>ROLL NUMBER:</h1>
-                </label>
-                <input type="number" class="form-control" id="rollno" name="rollNo" required>
-              </div>
-              <div class="form-group">
-                <label for="password" class="mt-2">
-                  <h6>PASSWORD:</h1>
-                </label>
-                <input type="password" class="form-control" id="password" name="password" required>
-              </div>
-              <div class="form-group">
-                <label for="passcode" class="mt-2">
-                  <h6>PASSCODE:</h1>
-                </label>
-                <input type="text" class="form-control" id="passcode" name="passcode" required>
-              </div>
 
-              <input type="hidden" name="latitude" id="latitude" />
-              <input type="hidden" name="longitude" id="longitude" />
-
-              <button type="button" class="btn btn-dark btn-block mt-2" id="getLocation">Get Location</button>
-              <button type="submit" class="btn btn-dark btn-block mt-2">Submit</button>
-
-              <!-- <button type="submit" >Login</button> -->
-            </form>
 
 
 
@@ -70,4 +41,53 @@
         </div>
       </div>
       
-  </div>
+    </div>
+  </div>   -->
+
+  <section class="vh-75 gradient-custom">
+    <div class="container h-25">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div style="background-color: black;" class="card text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mt-4 pb-5">
+                <div class="text-white mb-5">
+                  <h2>Mark Attendance</h2>
+                </div>
+                <form id="myForm" action='/students/attendance' method="POST">
+                  <div class="form-group">
+                    <label for="rollno" class="mt-2">
+                      <h6>ROLL NUMBER:</h1>
+                    </label>
+                    <input type="number" class="form-control" id="rollno" name="rollNo" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="mt-4">
+                      <h6>PASSWORD:</h1>
+                    </label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="passcode" class="mt-4">
+                      <h6>PASSCODE:</h1>
+                    </label>
+                    <input type="text" class="form-control" id="passcode" name="passcode" required>
+                  </div>
+    
+                  <input type="hidden" name="latitude" id="latitude" />
+                  <input type="hidden" name="longitude" id="longitude" />
+                  
+                  <button type="button" class="btn btn-outline-light me-4 mt-5" id="getLocation">Get Location</button>
+                  <button type="submit" class="btn btn-outline-light mt-5">Submit</button>
+                  <!-- <button type="submit" >Login</button> -->
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

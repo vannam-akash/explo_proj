@@ -6,8 +6,9 @@ const Passcode = require('../models/passcode');
 
 
 function validatedIp(arr,ip){
-    if(arr.includes(ip)) return false;
-    else return true;
+    // if(arr.includes(ip)) return false;
+    // else return true;
+    return true;
 }
 
 // async function preventProxy(obj){
@@ -264,7 +265,8 @@ module.exports = {
                 if(pg7.pass.toString()==passcode.toString()){
                     console.log("7 hit");
                      //const name = g4.occupiedBy;
-                     if(getDistance(g4,{lat:latitude,lon:longitude})>2.5*d_g4g5){
+                     if(getDistance(g4,{lat:latitude,lon:longitude})>1000*d_g4g5){
+                        console.log('caught u');
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }

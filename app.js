@@ -8,6 +8,7 @@ const AppError = require('./utility/appError');
 const morgan = require('morgan');
 const path = require('path');
 const ejsMate = require('ejs-mate');
+const flash = require('connect-flash');
 
 
 const app = express();
