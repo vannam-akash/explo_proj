@@ -14,10 +14,12 @@ module.exports = {
         const prof = await Professor.findOne({ uid, password });
         if (!prof) throw new AppError("Incorrect Login ID or Password!!!", 404);
         req.session.profId = prof._id;
+        req.flash('success','Logged You In!!!!')
         res.redirect('/lectHalls');
     }),
     logout: catchAsync(async (req, res, next) => {
         req.session.profId = null;
+        req.flash('error','Logged You Out!!!')
         res.redirect('/lectHalls'); 
     })
 }

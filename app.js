@@ -1,3 +1,10 @@
+// Setting up env file
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+const uri = process.env.MONGO_URL;
+
+
 // Requiring node packages
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,7 +17,6 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const flash = require('connect-flash');
 
-
 const app = express();
 app.use(methodOverride('_method'));
 app.set('trust proxy', true);
@@ -21,8 +27,6 @@ const refreshPasscode = require('./utility/refreshPasscode');
 const clearAttendance = require('./utility/clearAttendance');
 const updateLtProfStatus = require('./utility/updateLtProfStatus');
 
-
-// Middleware
 
 
 
@@ -43,17 +47,17 @@ async function func1(){
   const pg5=await Passcode.findOne({name:"pass5"});
   const pg6=await Passcode.findOne({name:"pass6"});
   const pg7=await Passcode.findOne({name:"pass7"});
-
+  
   pg4.pass="4"+Math.floor(Math.random()*1000+1);
   pg5.pass="5"+Math.floor(Math.random()*1000+1);
   pg6.pass="6"+Math.floor(Math.random()*1000+1);
   pg7.pass="7"+Math.floor(Math.random()*1000+1);
-
+  
   await pg4.save();
   await pg5.save();
   await pg6.save();
   await pg7.save();
-
+  
 }
 setInterval(func1,30*1000);
 
@@ -110,6 +114,19 @@ const sessionOptions = {
 };
 app.use(session(sessionOptions));
 
+// Flash messages
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+})
+
+// Middleware
+app.use((req, res, next) => {
+  res.locals.profId = req.session.profId;
+  next();
+});
 
 // Morgan tiny
 app.use(morgan('tiny'));
@@ -118,7 +135,8 @@ app.use(morgan('tiny'));
 // Connect to MongoDB
 main().catch(err => console.log('There was an error connecting to mongoose :(', err));
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/proj');
+  await mongoose.connect(uri,{useNewUrlParser:true});
+  console.log(uri);
   console.log('Sucessfully connected to mongoose!')
 }
 
@@ -147,7 +165,7 @@ app.use((err, req, res, next) => {
 
 
 // Start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });

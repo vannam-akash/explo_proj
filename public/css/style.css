@@ -9,26 +9,31 @@
 
 /* My styles */
 .myCont {
-  margin-top: 80px;
+  margin-top: 0px;
   /* margin-bottom: 30px; */
 }
 
 /* Prof login styles */
-.gradient-custom {
+/* .gradient-custom { */
   /* fallback for old browsers */
-  background: #5c9f24;
+  /* background: #5c9f24;
   
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgb(98, 239, 28), rgb(103, 117, 96));
+  /* background: -webkit-linear-gradient(to right, rgb(98, 239, 28), rgb(103, 117, 96)); */
   
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgb(31, 250, 23), rgb(197, 212, 194));
-  }
+  /* background: linear-gradient(to right, rgb(31, 250, 23), rgb(197, 212, 194)); */ 
+  /* } */
 
   body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* background: #9053c7;
+    background: -webkit-linear-gradient(-135deg, #6cee84, yellow);
+    background: -o-linear-gradient(-135deg, #6cee84, yellow);
+    background: -moz-linear-gradient(-135deg, #6cee84, yellow);
+    background: linear-gradient(-135deg, #6cee84, yellow); */
 }
 .mainFooter{
     margin-top: auto;
@@ -52,7 +57,9 @@ th, td {
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  background: linear-gradient(to right, rgb(31, 250, 23), rgb(197, 212, 194));
+  /* background: linear-gradient(to right, rgb(149, 255, 143), rgb(244, 247, 244)); */
+  /* background-color: rgb(210, 255, 208) !important; */
+  background-color: white !important;
   color: #000;
 }
 
@@ -112,7 +119,7 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(0, 0, 0, 1);
+  background: rgba(0, 0, 0, 0.75);
   transition: all 0.5s;
   z-index: 997;
   height: 80px;
@@ -469,6 +476,10 @@ h6 {
   text-align: center;
 }
 
+#hero .carousel-content p {
+  font-size: 19px;
+}
+
 #hero h2 {
   color: #fff;
   margin-bottom: 30px;
@@ -488,6 +499,7 @@ h6 {
 }
 
 #hero .carousel-inner .carousel-item {
+  
   transition-property: opacity;
   background-position: center top;
 }
@@ -599,7 +611,7 @@ h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 150px 0;
 }
 
 .section-bg {
@@ -832,8 +844,9 @@ section {
 --------------------------------------------------------------*/
 .why-us .box {
   padding: 50px 30px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.3);
   transition: all ease-in-out 0.3s;
+  font: 100px !important;
 }
 
 .why-us .box span {
@@ -851,24 +864,24 @@ section {
   color: #2a2a2a;
 }
 
-.why-us .box p {
+/* .why-us .box p {
   color: #aaaaaa;
   font-size: 15px;
   margin: 0;
   padding: 0;
-}
+} */
 
-.why-us .box:hover {
+/* .why-us .box:hover {
   background: #5c9f24;
   padding: 30px 30px 70px 30px;
   box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.18);
-}
+} */
 
-.why-us .box:hover span,
+/* .why-us .box:hover span,
 .why-us .box:hover h4,
 .why-us .box:hover p {
   color: #fff;
-}
+} */
 
 /*--------------------------------------------------------------
 # Portfolio
@@ -1139,7 +1152,8 @@ section {
 --------------------------------------------------------------*/
 .pricing .box {
   padding: 20px;
-  background: #000;
+  background: white;
+  color: #444444 !important;
   text-align: center;
   border-radius: 8px;
   position: relative;
@@ -1150,9 +1164,9 @@ section {
   font-weight: 400;
   padding: 15px;
   margin-top: 15px;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 600;
-  color: rgb(253, 250, 250);
+  color: rgb(18, 17, 17);
 }
 
 .pricing .box h4 {
@@ -1178,10 +1192,10 @@ section {
 .pricing .box ul {
   padding: 0;
   list-style: none;
-  color: rgb(253, 250, 250);
+  color: rgb(25, 24, 24);
   text-align: center;
   line-height: 20px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .pricing .box ul li {

@@ -16,17 +16,18 @@
 <div class="container">
   
   <div class="section-title">
+    <%- include('../partials/flash')%>
     <h2>Lecture Hall Status</h2>
     <% if(prof) {%>
       <h4>Professor : <%= prof.name %></h4>
       <% } %>
     </div>
 
-    <div class="row">
+    <div class="row why-us" >
       <% for (let i=0; i <=3; i++) { %>
 
           <div class="col-md-4 mt-4 mt-lg-0 mb-5">
-            <div class="box h-100 text-white">
+            <div class="box h-100">
               <h3><%= lts[i].name %></h3>
               <!-- <h4><sup>$</sup>0<span> / month</span></h4> -->
               <ul>

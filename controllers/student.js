@@ -6,9 +6,9 @@ const Passcode = require('../models/passcode');
 
 
 function validatedIp(arr,ip){
-    // if(arr.includes(ip)) return false;
-    // else return true;
-    return true;
+    if(arr.includes(ip)) return false;
+    else return true;
+    // return true;
 }
 
 // async function preventProxy(obj){

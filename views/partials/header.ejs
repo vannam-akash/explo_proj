@@ -29,9 +29,12 @@
         <ul>
           <li><a class="nav-link scrollto" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="/lectHalls">Live Status</a></li>
-          <li><a class="nav-link scrollto" href="/students/attendance">Attendace Marking</a></li>
-          <li><a class="nav-link scrollto " href="/professors/logout">Professor Logout</a></li>
-          <li><a class="nav-link scrollto" href="/professors/login">Professor Login</a></li>
+          <li><a class="nav-link scrollto" href="/students/attendance">Attendance Marking</a></li>
+          <% if(profId!=null){%>
+            <li><a class="nav-link scrollto " href="/professors/logout">Professor Logout</a></li>
+          <% }else{%>
+            <li><a class="nav-link scrollto" href="/professors/login">Professor Login</a></li>
+            <% } %>
           <!-- <li><a href="blog.html">Blog</a></li> -->
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -53,7 +56,7 @@
           <!-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
           <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
-        <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
+        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
