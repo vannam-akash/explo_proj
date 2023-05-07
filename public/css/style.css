@@ -1,39 +1,13 @@
-/**
-* Template Name: Groovin
-* Updated: Mar 10 2023 with Bootstrap v5.2.3
-* Template URL: https://bootstrapmade.com/groovin-free-bootstrap-theme/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-
 /* My styles */
 .myCont {
   margin-top: 0px;
   /* margin-bottom: 30px; */
 }
 
-/* Prof login styles */
-/* .gradient-custom { */
-  /* fallback for old browsers */
-  /* background: #5c9f24;
-  
-  /* Chrome 10-25, Safari 5.1-6 */
-  /* background: -webkit-linear-gradient(to right, rgb(98, 239, 28), rgb(103, 117, 96)); */
-  
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  /* background: linear-gradient(to right, rgb(31, 250, 23), rgb(197, 212, 194)); */ 
-  /* } */
-
-  body{
+body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* background: #9053c7;
-    background: -webkit-linear-gradient(-135deg, #6cee84, yellow);
-    background: -o-linear-gradient(-135deg, #6cee84, yellow);
-    background: -moz-linear-gradient(-135deg, #6cee84, yellow);
-    background: linear-gradient(-135deg, #6cee84, yellow); */
 }
 .mainFooter{
     margin-top: auto;
@@ -150,7 +124,8 @@ h6 {
 * Desktop Navigation 
 */
 .navbar {
-  padding: 0;
+  padding: 0 !important;
+  /* position: fixed !important ; */
 }
 
 .navbar ul {
@@ -258,7 +233,7 @@ h6 {
 }
 
 .navbar .dropdown ul li {
-  min-width: 200px;
+  min-width: 100px;
 }
 
 .navbar .dropdown ul a {
@@ -335,13 +310,13 @@ h6 {
 }
 
 .navbar-mobile {
-  position: fixed;
+  position: fixed !important;
   overflow: hidden;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(17, 17, 17, 0.9);
+  /* background: rgba(17, 17, 17, 0.9); */
   transition: 0.3s;
   z-index: 999;
 }
