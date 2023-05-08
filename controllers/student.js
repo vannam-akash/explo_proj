@@ -86,7 +86,7 @@ module.exports = {
 
     verify: catchAsync(async (req, res, next) => {
         const { x } = req.params;
-        console.log("Verify route hit");
+        // console.log("Verify route hit");
         // passcodes.func(passcodes.passes);
         if (x == 1) {
             const pg4 = await Passcode.findOne({ name: "pass4" });
@@ -125,7 +125,7 @@ module.exports = {
       
 
             const {rollNo, password, passcode,latitude,longitude} = req.body;
-            console.log(req.body);
+            // console.log(req.body);
             const pg4=await Passcode.findOne({name:"pass4"});
             const pg5=await Passcode.findOne({name:"pass5"});
             const pg6=await Passcode.findOne({name:"pass6"});
@@ -137,11 +137,11 @@ module.exports = {
             const stud = await Student.findOne({rollNo,password});
             if(!stud) throw new Error({message:"Sorry could not find student!!"});
             req.session.studId = stud._id;
-            console.log(passcode);
-            console.log(pg6," ",pg6.pass);
+            // console.log(passcode);
+            // console.log(pg6," ",pg6.pass);
              if(passcode[0].toString()=="4"){
                 let x;
-                if(getDistance(g4,{lat:latitude,lon:longitude})>2.5*d_g4g5){
+                if(getDistance(g4,{lat:latitude,lon:longitude})>1000*d_g4g5){
                     x=0;
                     return res.redirect(`/students/verify/${x}`);
                 }
@@ -150,7 +150,7 @@ module.exports = {
                      //const name = g4.occupiedBy;
                      
                      const hall= await LectureHall.findOne({name:'G4'});
-                     console.log(hall);
+                     (hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
                      if(prof){prof.att.push(stud._id);await prof.save(); x=1;
                             //preventProxy({prof,x});
@@ -162,13 +162,13 @@ module.exports = {
                         || req.socket?.remoteAddress
                         
                         const reqIp = parseIp(req);
-                        console.log("IP inside the hall is :",reqIp);
+                        // console.log("IP inside the hall is :",reqIp);
                         if(!validatedIp(prof.ip,reqIp)){
-                            console.log("Didn't allow proxy!!!")
+                            // console.log("Didn't allow proxy!!!")
                             x=0;
                         }
                         else{
-                            console.log("Pushing the ip in the array!!")
+                            // console.log("Pushing the ip in the array!!")
                             prof.ip.push(reqIp.toString());
                             await prof.save();
                             x=1;
@@ -184,14 +184,14 @@ module.exports = {
                 if(pg5.pass.toString()==passcode.toString()){
                     console.log("5 hit");
                      //const name = g4.occupiedBy;
-                     console.log(getDistance(g5,{lat:latitude,lon:longitude}));
-                     if(getDistance(g5,{lat:latitude,lon:longitude})>2.5*d_g4g5){
+                    //  console.log(getDistance(g5,{lat:latitude,lon:longitude}));
+                     if(getDistance(g5,{lat:latitude,lon:longitude})>1000*d_g4g5){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
                      
                      const hall= await LectureHall.findOne({name:'G5'});
-                     console.log(hall);
+                    //  console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
                      if(prof){prof.att.push(stud._id);await prof.save(); x=1;
                             // preventProxy({prof,x});
@@ -203,13 +203,13 @@ module.exports = {
                         || req.socket?.remoteAddress
                         
                         const reqIp = parseIp(req);
-                        console.log("IP inside the hall is :",reqIp);
+                        // console.log("IP inside the hall is :",reqIp);
                         if(!validatedIp(prof.ip,reqIp)){
-                            console.log("Didn't allow proxy!!!")
+                            // console.log("Didn't allow proxy!!!")
                             x=0;
                         }
                         else{
-                            console.log("Pushing the ip in the array!!")
+                            // console.log("Pushing the ip in the array!!")
                             prof.ip.push(reqIp.toString());
                             await prof.save();
                             x=1;
@@ -224,13 +224,13 @@ module.exports = {
                 if(pg6.pass.toString()==passcode.toString()){
                     console.log("6 hit");
                      //const name = g4.occupiedBy;
-                     if(getDistance(g6,{lat:latitude,lon:longitude})>2.5*d_g4g5){
+                     if(getDistance(g6,{lat:latitude,lon:longitude})>1000*d_g4g5){
                         x=0;
                         return res.redirect(`/students/verify/${x}`);
                     }
                      
                      const hall= await LectureHall.findOne({name:'G6'});
-                     console.log(hall);
+                    //  console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
                      if(prof){prof.att.push(stud._id);await prof.save(); x=1;
                             //preventProxy({prof,x});
@@ -271,7 +271,7 @@ module.exports = {
                         return res.redirect(`/students/verify/${x}`);
                     }
                      const hall= await LectureHall.findOne({name:'G7'});
-                     console.log(hall);
+                    //  console.log(hall);
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
                      if(prof){prof.att.push(stud._id);await prof.save(); x=1;}
                     //  Code to prevent proxy
@@ -305,8 +305,8 @@ module.exports = {
                return res.redirect(`/students/verify/${x}`);
              }
             
-            // console.log(passcode[0],"after");
-            // console.log(stud);
-            // console.log(req.body);
+            console.log(passcode[0],"after");
+            console.log(stud);
+            console.log(req.body);
             })
         };

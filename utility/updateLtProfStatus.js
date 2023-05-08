@@ -9,11 +9,11 @@ async function updateLtProfStatus() {
   let min = t.getMinutes();
   let sec = t.getSeconds();
   console.log("Inside update function", min, sec);
-  if (min == 50) {
+  // if (min == 50) {
     console.log("inside if statement")
     for (lt of lts) {
       if (lt.occupiedBy) {
-        console.log("Updating.......")
+        console.log("Updating.......",lt)
         const profName = lt.occupiedBy;
         const prof = await Professor.findOne({ name: profName });
         prof.isTakingClass = false;
@@ -23,7 +23,7 @@ async function updateLtProfStatus() {
         lt.classTime = null;
         await lt.save();
         await prof.save();
-      }
+      // }
     }
   }
 }

@@ -12,7 +12,7 @@ async function clearAttendance() {
     x.attlogs.push({"when":d1,"attlog":x.att});
     x.att = [];
     x.ip = [];
-    console.log(x);
+    // console.log(x);
     await x.save();
   }
 

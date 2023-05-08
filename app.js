@@ -61,8 +61,8 @@ async function func1(){
 }
 setInterval(func1,30*1000);
 
-// Updating codes every 30 secs
-setInterval(refreshPasscode, 30 * 1000);
+// Updating codes every 60 secs
+setInterval(refreshPasscode, 60 * 1000);
 
 
 // Clearing attendance 
@@ -78,10 +78,12 @@ if (min < 50) {
   let difSec = 60 - sec;
   let timeout = difMin * 60 * 1000 + difSec * 1000;
   setTimeout(() => {
+    updateLtProfStatus();
     setInterval(updateLtProfStatus, 1000 * 60 * 60);
   }, timeout);
 }
 else {
+  updateLtProfStatus();
   let difMin = 60 - min - 1;
   let difSec = 60 - sec;
   let timeout = (difMin + 60) * 60 * 1000 + difSec * 1000;
@@ -136,7 +138,7 @@ app.use(morgan('tiny'));
 main().catch(err => console.log('There was an error connecting to mongoose :(', err));
 async function main() {
   await mongoose.connect(uri,{useNewUrlParser:true});
-  console.log(uri);
+  // console.log(uri);
   console.log('Sucessfully connected to mongoose!')
 }
 
