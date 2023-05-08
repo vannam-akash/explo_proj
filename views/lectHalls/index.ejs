@@ -60,8 +60,7 @@
       <h1 class="mb-4 mt-5 text-center">Attendance Logs</h1>
       <div class="container">
       <% for(x of prof.attlogs){ %>
-        <% const d = x.when %>
-          <h4>Date:  <%=d.getDate()%>/<%=d.getMonth()+1%>/<%= d.getFullYear()%>  </h4>
+          <h4>Date:  <%=x.when.getDate()%>/<%=x.when.getMonth()+1%>/<%= x.when.getFullYear()%>  </h4>
           <% if (x.attlog) {%>
             <table class="table table-hover table-dark table-bordered">
             <thead>
