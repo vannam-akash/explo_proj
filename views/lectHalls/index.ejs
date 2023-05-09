@@ -60,6 +60,10 @@
       <h1 class="mb-4 mt-5 text-center">Attendance Logs</h1>
       <div class="container">
       <% for(x of prof.attlogs){ %>
+        <% console.log(prof.attlogs);const gmtTime = x.when;%>
+        <% const istOffset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds %>
+        <% const istTime = new Date(gmtTime.valueOf() + istOffset); %>
+        
           <h4>Date:  <%=x.when.toLocaleDateString()%>  </h4>
           <% if (x.attlog) {%>
             <table class="table table-hover table-dark table-bordered">

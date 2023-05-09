@@ -62,11 +62,11 @@ async function func1(){
 setInterval(func1,30*1000);
 
 // Updating codes every 60 secs
-setInterval(refreshPasscode, 60 * 1000);
+setInterval(refreshPasscode,300*60 * 1000);
 
 
 // Clearing attendance 
-setInterval(clearAttendance,0.5 * 60 * 1000);
+setInterval(clearAttendance,5*60 * 1000);
 
 
 // Code to set the time offset and 1 hr interval for running this function

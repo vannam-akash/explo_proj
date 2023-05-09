@@ -10,6 +10,7 @@ module.exports = {
         let profID = req.session.profId || null;
         let prof = null;
         if (profID) { prof = await Professor.findById(profID).populate('attlogs.attlog'); }
+        // console.log(prof.attlogs);
         res.render('lectHalls/index', { lts, prof});
     }),
     bookLt: catchAsync(async (req, res) => {
@@ -29,8 +30,9 @@ module.exports = {
     }),
     renderLtProf: catchAsync(async (req, res) => {
         const { profid } = req.params;
-        const prof = await Professor.findById(profid);
+        const prof = await Professor.findById(profid).populate('attlogs.attlog');
         const lts = await LectureHall.find();
+        // if(prof)console.log(prof.attlogs);
         res.render('lectHalls/index', { lts, prof });
     })
 }

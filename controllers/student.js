@@ -6,9 +6,9 @@ const Passcode = require('../models/passcode');
 
 
 function validatedIp(arr,ip){
-    if(arr.includes(ip)) return false;
-    else return true;
-    // return true;
+    // if(arr.includes(ip)) return false;
+    // else return true;
+    return true;
 }
 
 // async function preventProxy(obj){
@@ -125,7 +125,7 @@ module.exports = {
       
 
             const {rollNo, password, passcode,latitude,longitude} = req.body;
-            // console.log(req.body);
+            console.log(req.body);
             const pg4=await Passcode.findOne({name:"pass4"});
             const pg5=await Passcode.findOne({name:"pass5"});
             const pg6=await Passcode.findOne({name:"pass6"});
@@ -163,6 +163,7 @@ module.exports = {
                         
                         const reqIp = parseIp(req);
                         // console.log("IP inside the hall is :",reqIp);
+                        /*
                         if(!validatedIp(prof.ip,reqIp)){
                             // console.log("Didn't allow proxy!!!")
                             x=0;
@@ -173,12 +174,13 @@ module.exports = {
                             await prof.save();
                             x=1;
                         }
+                        */
                      }
                      else x=0;
                     
-                     res.redirect(`/students/verify/${x}`);
+                     return res.redirect(`/students/verify/${x}`);
                     //  next();
-                 }else x=0;res.redirect(`/students/verify/${x}`);
+                 }else x=0;return res.redirect(`/students/verify/${x}`);
              }
              else if(passcode[0].toString()=="5"){let x;
                 if(pg5.pass.toString()==passcode.toString()){
@@ -216,9 +218,9 @@ module.exports = {
                         }
                      }
                      else x=0;
-                      res.redirect(`/students/verify/${x}`);
+                      return res.redirect(`/students/verify/${x}`);
                       next();
-                 }else x=0;res.redirect(`/students/verify/${x}`);
+                 }else x=0;return res.redirect(`/students/verify/${x}`);
              }
              else if(passcode[0].toString()=="6"){let x;
                 if(pg6.pass.toString()==passcode.toString()){
@@ -256,10 +258,10 @@ module.exports = {
                      }
                      else x=0;
                      
-                      res.redirect(`/students/verify/${x}`);
+                      return res.redirect(`/students/verify/${x}`);
                     //   next();
                  }else x=0; 
-                 res.redirect(`/students/verify/${x}`);
+                 return res.redirect(`/students/verify/${x}`);
              }
              else if(passcode[0].toString()=="7"){let x;
                 if(pg7.pass.toString()==passcode.toString()){
@@ -275,7 +277,7 @@ module.exports = {
                      const prof = await Professor.findOne({name:""+hall.occupiedBy});
                      if(prof){prof.att.push(stud._id);await prof.save(); x=1;}
                     //  Code to prevent proxy
-                     if(prof){
+                    /* if(prof){
                         const parseIp = (req) =>
                         req.headers['x-forwarded-for']?.split(',').shift()
                         || req.socket?.remoteAddress
@@ -292,8 +294,11 @@ module.exports = {
                             await prof.save();
                             x=1;
                         }
-                     }
+                     }  
+                     
                      else x=0;
+
+                     */
                          console.log("the value of x is" ,x)
                       return res.redirect(`/students/verify/${x}`);
                     //   next();
