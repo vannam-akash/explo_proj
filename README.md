@@ -1,12 +1,11 @@
 # EXPLORATORY PROJECT
 
 # Team Members:
-1. Abhishek Gupta         	21135002
-2. Akash Vannam          	21135011
-3. Amit Sharma              	21135016
-4. Anshul Soni               	21135021
-5. Sahil Singh                	21135116
-PART-II (IV SEMESTER):
+1. Abhishek Gupta - 21135002
+2. Akash Vannam -	21135011
+3. Amit Sharma -	21135016
+4. Anshul Soni -	21135021
+5. Sahil Singh -	21135116
 
 # Title of the Project: 
 Centralized Lecture Hall Live Occupancy Tracker cum Attendance Recorder
